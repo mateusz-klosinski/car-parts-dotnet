@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDA.MK.CarParts", "SDA.MK.CarParts\SDA.MK.CarParts.csproj", "{DDF0AF89-4EB3-44C6-9456-22F7209EFB7D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4C4701A8-FB6E-4555-8D6E-D512FD15F500}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDF0AF89-4EB3-44C6-9456-22F7209EFB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDF0AF89-4EB3-44C6-9456-22F7209EFB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDF0AF89-4EB3-44C6-9456-22F7209EFB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDF0AF89-4EB3-44C6-9456-22F7209EFB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C4701A8-FB6E-4555-8D6E-D512FD15F500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C4701A8-FB6E-4555-8D6E-D512FD15F500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C4701A8-FB6E-4555-8D6E-D512FD15F500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C4701A8-FB6E-4555-8D6E-D512FD15F500}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9C365543-560B-45E1-95E9-BF2A63A77B29}
+	EndGlobalSection
+EndGlobal
