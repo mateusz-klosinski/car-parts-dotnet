@@ -48,6 +48,21 @@ namespace SDA.MK.CarParts
 			basketBuilder.HasKey(b => b.Id);
 			basketBuilder.HasOne(b => b.Client);
 			basketBuilder.HasMany(b => b.BasketEntries);
+
+
+			partBuilder.HasData(new List<Part>
+			{
+				new Part("Head gasket", 100),
+				new Part("Spark plug", 60),
+				new Part("Oil filter", 40),
+				new Part("Air filter", 15),
+				new Part("Brake disc", 200),
+				new Part("Brake pads", 85),
+				new Part("Shock absorber", 135),
+				new Part("Wiper blades", 70),
+				new Part("Engine oil", 240),
+			});
 		}
 	}
 }
+

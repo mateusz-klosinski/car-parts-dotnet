@@ -5,6 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - CONNECTIONSTRINGS__DATABASE=Server=db;Database=master;User=sa;Password=Strong!Passw0rd;
     ports:
       - "80"
     volumes:

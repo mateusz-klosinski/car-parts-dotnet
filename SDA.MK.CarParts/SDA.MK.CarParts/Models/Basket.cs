@@ -14,6 +14,7 @@
 		{
 			Client = client ?? throw new ArgumentNullException(nameof(client));
 		}
+
 		private Basket(Guid id)
 		{
 			Id = id;
@@ -45,9 +46,9 @@
 			basketEntries.Remove(entry);
 		}
 
-		public void ChangeAmount(Guid entryId, int amount)
+		public void ChangeAmount(Guid partId, int amount)
 		{
-			var entry = basketEntries.FirstOrDefault(e => e.Id == entryId);
+			var entry = basketEntries.FirstOrDefault(e => e.Part.Id == partId);
 
 			if (entry is null)
 			{
