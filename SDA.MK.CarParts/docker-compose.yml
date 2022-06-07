@@ -11,6 +11,7 @@ services:
 
   db:
     image: "mcr.microsoft.com/mssql/server"
+    user: root
     environment:
-      SA_PASSWORD: "dev"
+      SA_PASSWORD: "Strong!Passw0rd"
       ACCEPT_EULA: "Y"
