@@ -23,6 +23,20 @@ namespace SDA.MK.CarParts.Endpoints
 			.Produces<ErrorResponse>(StatusCodes.Status400BadRequest, "application/json")
 			.Produces<ErrorResponse>(StatusCodes.Status500InternalServerError, "application/json");
 
+			endpoints.MapGet("/part/{id}", async ([FromServices] Context context, [FromRoute] Guid id) =>
+			{
+				var parts = await context.Parts
+				.Where(p => p.Id == id)
+				.Select(p => new PartResponse(p.Id, p.Name, p.Price))
+				.FirstOrDefaultAsync();
+
+				return Results.Ok(parts);
+			})
+			.WithName("Get part")
+			.Produces<PartResponse>(StatusCodes.Status200OK, "application/json")
+			.Produces<ErrorResponse>(StatusCodes.Status400BadRequest, "application/json")
+			.Produces<ErrorResponse>(StatusCodes.Status500InternalServerError, "application/json");
+
 			endpoints.MapPost("/part", async ([FromServices] Context context, [FromBody] CreatePartRequest request) =>
 			{
 				var part = new Part(request.Name, request.Price);

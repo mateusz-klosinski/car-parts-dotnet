@@ -11,11 +11,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>();
 
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy("Dev", builder => builder
+		.AllowAnyHeader()
+		.AllowAnyMethod()
+		.AllowAnyOrigin()
+	);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("Dev");
 
 // Exceptions
 app.UseExceptionHandler(handlerApp =>

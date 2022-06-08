@@ -7,7 +7,7 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - CONNECTIONSTRINGS__DATABASE=Server=db;Database=master;User=sa;Password=Strong!Passw0rd;
     ports:
-      - "80"
+      - "5100:80"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

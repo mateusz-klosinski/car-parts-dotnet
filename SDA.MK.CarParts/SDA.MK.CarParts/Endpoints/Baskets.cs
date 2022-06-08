@@ -9,7 +9,7 @@ namespace SDA.MK.CarParts.Endpoints
 	{
 		public static IEndpointRouteBuilder MapBasketEndpoints(this IEndpointRouteBuilder endpoints)
 		{
-			endpoints.MapGet("/basket", async ([FromServices] Context context, [FromQuery] Guid clientId) =>
+			endpoints.MapGet("/basket/{clientId}", async ([FromServices] Context context, [FromRoute] Guid clientId) =>
 			{
 				var basket = await context.Baskets
 					.Where(b => b.Client.Id == clientId)
@@ -35,6 +35,27 @@ namespace SDA.MK.CarParts.Endpoints
 				return Results.Ok(basket);
 			})
 			.WithName("Get Basket for Client")
+			.Produces<BasketResponse>(StatusCodes.Status200OK, "application/json")
+			.Produces<ErrorResponse>(StatusCodes.Status400BadRequest, "application/json")
+			.Produces<ErrorResponse>(StatusCodes.Status500InternalServerError, "application/json");
+
+			endpoints.MapDelete("/basket/{clientId}", async ([FromServices] Context context, [FromRoute] Guid clientId) =>
+			{
+				var basket = await context.Baskets
+					.Where(b => b.Client.Id == clientId)
+					.FirstOrDefaultAsync();
+
+				if (basket is null)
+				{
+					throw new ArgumentException($"Cannot find basket for client: {clientId}, first create correct client!");
+				}
+
+				basket.Clear();
+				await context.SaveChangesAsync();
+
+				return Results.Ok(basket);
+			})
+			.WithName("Clear basket")
 			.Produces<BasketResponse>(StatusCodes.Status200OK, "application/json")
 			.Produces<ErrorResponse>(StatusCodes.Status400BadRequest, "application/json")
 			.Produces<ErrorResponse>(StatusCodes.Status500InternalServerError, "application/json");
