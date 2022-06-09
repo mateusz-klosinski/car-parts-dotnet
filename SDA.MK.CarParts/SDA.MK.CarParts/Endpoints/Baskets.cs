@@ -45,6 +45,8 @@ namespace SDA.MK.CarParts.Endpoints
 			endpoints.MapDelete("/basket/{clientId}", async ([FromServices] Context context, [FromRoute] Guid clientId) =>
 			{
 				var basket = await context.Baskets
+					.Include(b => b.BasketEntries)
+						.ThenInclude(be => be.Part)
 					.Where(b => b.Client.Id == clientId)
 					.FirstOrDefaultAsync();
 
