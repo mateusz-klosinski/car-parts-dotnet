@@ -7,6 +7,7 @@
 		public IReadOnlyCollection<BasketEntry> BasketEntries => basketEntries.AsReadOnly();
 		public int TotalItems => basketEntries.Sum(e => e.Amount);
 		public decimal Price => basketEntries.Sum(e => e.Price);
+		public bool IsEmpty => !basketEntries.Any();
 
 		private List<BasketEntry> basketEntries = new();
 

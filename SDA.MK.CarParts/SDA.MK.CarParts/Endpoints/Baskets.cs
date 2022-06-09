@@ -13,6 +13,8 @@ namespace SDA.MK.CarParts.Endpoints
 			{
 				var basket = await context.Baskets
 					.Where(b => b.Client.Id == clientId)
+					.Include(b => b.BasketEntries)
+						.ThenInclude(be => be.Part)
 					.Select(b => new BasketResponse(
 						b.Id, 
 						b.BasketEntries.Select(be => 
@@ -23,7 +25,8 @@ namespace SDA.MK.CarParts.Endpoints
 								be.Price
 							)), 
 						b.TotalItems, 
-						b.Price
+						b.Price,
+						b.IsEmpty
 						))
 					.FirstOrDefaultAsync();
 
@@ -64,6 +67,8 @@ namespace SDA.MK.CarParts.Endpoints
 			endpoints.MapPost("/basket/part/", async ([FromServices] Context context, [FromBody] AddPartToBasketRequest request) =>
 			{
 				var basket = await context.Baskets
+					.Include(b => b.BasketEntries)
+						.ThenInclude(be => be.Part)
 					.Where(b => b.Client.Id == request.ClientId)
 					.FirstOrDefaultAsync();
 
@@ -95,6 +100,8 @@ namespace SDA.MK.CarParts.Endpoints
 			endpoints.MapDelete("/basket/{clientId}/part/{partId}", async ([FromServices] Context context, [FromRoute] Guid clientId, [FromRoute] Guid partId) =>
 			{
 				var basket = await context.Baskets
+					.Include(b => b.BasketEntries)
+						.ThenInclude(be => be.Part)
 					.Where(b => b.Client.Id == clientId)
 					.FirstOrDefaultAsync();
 
@@ -125,6 +132,8 @@ namespace SDA.MK.CarParts.Endpoints
 			endpoints.MapPut("/basket/part", async ([FromServices] Context context, [FromBody] ChangePartAmount request) =>
 			{
 				var basket = await context.Baskets
+					.Include(b => b.BasketEntries)
+						.ThenInclude(be => be.Part)
 					.Where(b => b.Client.Id == request.ClientId)
 					.FirstOrDefaultAsync();
 

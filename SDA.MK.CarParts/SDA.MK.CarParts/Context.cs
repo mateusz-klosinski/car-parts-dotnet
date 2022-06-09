@@ -30,22 +30,26 @@ namespace SDA.MK.CarParts
 			var partBuilder = modelBuilder.Entity<Part>();
 			partBuilder.ToTable("Parts");
 			partBuilder.HasKey(p => p.Id);
+			partBuilder.Property(p => p.Id).ValueGeneratedNever();
 			partBuilder.Property(p => p.Name).IsRequired().HasMaxLength(500);
 			partBuilder.Property(p => p.Price).IsRequired().HasPrecision(7, 2);
 
 			var clientBuilder = modelBuilder.Entity<Client>();
 			clientBuilder.ToTable("Clients");
 			clientBuilder.HasKey(c => c.Id);
+			clientBuilder.Property(c => c.Id).ValueGeneratedNever();
 
 			var basketEntryBuilder = modelBuilder.Entity<BasketEntry>();
 			basketEntryBuilder.ToTable("BasketEntries");
 			basketEntryBuilder.HasKey(be => be.Id);
+			basketEntryBuilder.Property(be => be.Id).ValueGeneratedNever();
 			basketEntryBuilder.HasOne(be => be.Part);
 			basketEntryBuilder.Property(be => be.Amount);
 
 			var basketBuilder = modelBuilder.Entity<Basket>();
 			basketBuilder.ToTable("Baskets");
 			basketBuilder.HasKey(b => b.Id);
+			basketBuilder.Property(b => b.Id).ValueGeneratedNever();
 			basketBuilder.HasOne(b => b.Client);
 			basketBuilder.HasMany(b => b.BasketEntries);
 

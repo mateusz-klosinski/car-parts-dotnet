@@ -2,7 +2,7 @@
 
 namespace SDA.MK.CarParts.Responses
 {
-	public record BasketResponse(Guid Id, IEnumerable<BasketEntryReponse> Entries, int TotalCount, decimal Price)
+	public record BasketResponse(Guid Id, IEnumerable<BasketEntryReponse> Entries, int TotalCount, decimal Price, bool IsEmpty)
 	{
 		public static BasketResponse FromBasket(Basket basket)
 		{
@@ -14,7 +14,7 @@ namespace SDA.MK.CarParts.Responses
 					be.Price
 				));
 
-			return new BasketResponse(basket.Id, entries, basket.TotalItems, basket.Price);
+			return new BasketResponse(basket.Id, entries, basket.TotalItems, basket.Price, basket.IsEmpty);
 		}
 	}
 }
