@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using SDA.MK.CarParts;
 using SDA.MK.CarParts.Endpoints;
 using SDA.MK.CarParts.Responses;
@@ -51,5 +52,9 @@ app.UseExceptionHandler(handlerApp =>
 app.MapClientsEndpoints();
 app.MapPartsEndpoints();
 app.MapBasketEndpoints();
+
+var dbContext = app.Services.GetRequiredService<Context>();
+
+dbContext.Database.Migrate();
 
 app.Run();
