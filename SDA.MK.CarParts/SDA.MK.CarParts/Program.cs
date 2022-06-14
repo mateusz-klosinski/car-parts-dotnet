@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<Context>();
+builder.Services.AddSignalR();
 
 builder.Services.AddCors(options =>
 {
@@ -49,12 +50,16 @@ app.UseExceptionHandler(handlerApp =>
 	});
 });
 
+app.MapHub<ChatHub>("/chat");
+
 app.MapClientsEndpoints();
 app.MapPartsEndpoints();
 app.MapBasketEndpoints();
 
-var dbContext = app.Services.GetRequiredService<Context>();
-
-dbContext.Database.Migrate();
+if (!app.Environment.IsDevelopment()) 
+{
+	var dbContext = app.Services.GetRequiredService<Context>();
+	dbContext.Database.Migrate();
+}
 
 app.Run();
