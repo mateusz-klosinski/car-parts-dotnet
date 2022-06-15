@@ -3,6 +3,7 @@
 	public enum MessageType
 	{
 		Default,
-		Join
+		Join,
+		Leave
 	}
 }
