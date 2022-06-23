@@ -4,6 +4,7 @@
 	{
 		Default,
 		Join,
-		Leave
+		Leave,
+		Typing
 	}
 }
